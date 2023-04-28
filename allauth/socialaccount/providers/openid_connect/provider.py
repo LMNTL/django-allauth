@@ -34,6 +34,12 @@ class OpenIDConnectProvider(OAuth2Provider):
     def get_slug(cls):
         return cls._server_id or super().get_slug()
 
+    def get_auth_params(self, request, action):
+        ret = super(OpenIDConnectProvider, self).get_auth_params(request, action)
+        if action == AuthAction.REAUTHENTICATE:
+            ret["prompt"] = "login"
+        return ret
+
     def get_default_scope(self):
         return ["openid", "profile", "email"]
 
