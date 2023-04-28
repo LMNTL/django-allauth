@@ -41,7 +41,7 @@ class OpenIDConnectProvider(OAuth2Provider):
         ret = super(OpenIDConnectProvider, self).get_auth_params(request, action)
         if action == AuthAction.REAUTHENTICATE:
             ret["prompt"] = "login"
-            ret["max-age"] = 0
+            ret["max_age"] = 0
         return ret
 
     def get_default_scope(self):
